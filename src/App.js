@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Navbar from "./Components/Navbar/Navbar";
+import Footer from "./Components/Footer/Footer";
+import Parent from "./Components/Parent/Parent";
+import About from "./Components/About/About/About";
+import Contact from "./Components/Contact/Contact";
+import Portofolio from "./Components/Portofolio/Portofolio";
+import Layout from "./Components/Layout/Layout";
+import Notfound from "./Components/Notfound/Notfound";
+import { RouterProvider, createBrowserRouter, createHashRouter } from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default function App(){
+  let routers=createHashRouter([
+    {path:'/' , element:<Layout/> , children:[
+      {index:true , element:<Parent/>},
+      {path:'portofolio', element:<Portofolio/>},
+      {path:'about', element:<About/>},
+      {path:'contact', element:<Contact/>},
+      {path:'*', element:<Notfound/>}
+    ]}
+
+  ])
+  
+  return<>
+       <RouterProvider router={routers}></RouterProvider>
+  </>
 }
-
-export default App;
